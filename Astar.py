@@ -8,33 +8,27 @@ class Enviorment:
 
 	def gridParser(self, file):
 		i=0;
-		row =[];
+		row = [];
 		with open(file) as fileObj:
 			for fileLine in fileObj:
-				##string = fileLine.split();
-				##print(string);
 				self.grid.append([]);
-				##self.grid[i].append([(int x) for x in fileLine.split()])
-
-
-				for char in fileLine.split('\n'):
-					##print(char);
+				row.clear()
+				for char in fileLine:
 					if "." in char:
-						row.append(0);
+						self.grid[i].append(0);
 					elif "#" in char:
-						row.append(-1);
+						self.grid[i].append(-1);
 					elif "A" in char:
-						row.append(1);
+						self.grid[i].append(1);
 					elif "B" in char:
-						row.append(2);
+						self.grid[i].append(2);
 					else :
-						self.grid[i].append(row);
-						i += 1;
+						i+=1;
 
-		##print(row);
+	def printGrid(self):
 		print(self.grid);
 
 
 env = Enviorment();
 env.gridParser("board-1-2.txt");
-#print(len(open("board-1-2.txt").readlines(  )));
+env.printGrid();
