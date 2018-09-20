@@ -52,23 +52,40 @@ class Enviorment:
 					e = Entry(master, bg ="blue", width=2)
 					e.grid(row=x, column=y)
 	def aStar(self) :
-                def reconstruct_path(cameFrom, current):
-                        total_path := {current}
+                def reconstructPath(cameFrom, current):
+                        total_path = [current]
                         while current in cameFrom.Keys:
                                 current = cameFrom[current]
                                 total_path.append(current)
                                 return total_path
                         
-                        def A_Star(start, goal):
-                                closedSet = []
-                                openSet = [start]
-                                cameFrom = an empty map
-                                gScore = map with default value of Infinity
-                                gScore[start] = 0
-                                fScore = map with default value of Infinity
-                                fScore[start] = heuristic_cost_estimate(start, goal)
+                def A_Star(start, goal):
+                        emptyGrid = self.grid
+                        infinityGrid = self.grid
+                        infinityValue = 1000
+                        for x in range(0, 7):
+                                for y in range(0, 20):
+                                        emptyGrid[x][y] = 0
+
+                        for x in range(0, 7):
+                                for y in range(0, 20):
+                                        infinityGrid[x][y] = infinityValue
+                                        
+                        closedSet = []
+                        openSet = [start]
+                        cameFrom = emptyGrid
+                        gScore = infinityGrid
+                        gScore[start] = 0
+                        fScore = infinityGrid
+                        fScore[start] = heuristic_cost_estimate(start, goal)
 
                                 while openSet: 
+                                        lowestCurrentValue = infinityValue
+                                        for x in range(0, 7):
+                                                for y in range(0, 20):
+                                                        if 
+                                                        temp[x][y] = 0
+
                                         current = the node in openSet having the lowest fScore[] value
                                         if current == goal:
                                                 return reconstruct_path(cameFrom, current)
