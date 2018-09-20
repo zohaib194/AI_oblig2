@@ -68,6 +68,8 @@ class Enviorment:
                           elif self.grid[x][y] == path :
                               e = Entry(master, bg ="blue", width=2)
                               e.grid(row=x, column=y)
+        def aStar(self):
+                
 
 def main():
         env = Enviorment();
