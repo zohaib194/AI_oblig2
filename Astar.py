@@ -52,13 +52,45 @@ class Enviorment:
 					e = Entry(master, bg ="blue", width=2)
 					e.grid(row=x, column=y)
 	def aStar(self) :
-		for x in range(0, 7) :
-			for y in range(0, 20) :
-				if self.grid[x][y] != wall :
-					self.grid[x][y] = path
-		
+                def reconstruct_path(cameFrom, current):
+                        total_path := {current}
+                        while current in cameFrom.Keys:
+                                current = cameFrom[current]
+                                total_path.append(current)
+                                return total_path
+                        
+                        def A_Star(start, goal):
+                                closedSet = []
+                                openSet = [start]
+                                cameFrom = an empty map
+                                gScore = map with default value of Infinity
+                                gScore[start] = 0
+                                fScore = map with default value of Infinity
+                                fScore[start] = heuristic_cost_estimate(start, goal)
 
+                                while openSet: 
+                                        current = the node in openSet having the lowest fScore[] value
+                                        if current == goal:
+                                                return reconstruct_path(cameFrom, current)
 
+                                        openSet.Remove(current)
+                                        closedSet.Add(current)
+
+                                        for neighbor of current:
+                                                if neighbor in closedSet
+                                                continue
+
+                                        tentative_gScore = gScore[current] + dist_between(current, neighbor)
+
+                                        if neighbor not in openSet
+                                        openSet.Add(neighbor)
+                                        else if tentative_gScore >= gScore[neighbor]
+                                        continue	
+
+                                cameFrom[neighbor] = current
+                                gScore[neighbor] = tentative_gScore
+                                fScore[neighbor] = gScore[neighbor] + heuristic_cost_estimate(neighbor, goal)
+                
 def main():
 	env = Enviorment();
 	master = Tk()
