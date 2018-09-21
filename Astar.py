@@ -59,8 +59,10 @@ class Enviorment:
     def makeWindow(self, master):
         path = self.aStar()
         for p in path:
-          if self.grid[p[1]][p[0]] == self.startCell :
+          if self.grid[p[1]][p[0]] == start :
             self.grid[p[1]][p[0]] = start;
+          elif self.grid[p[1]][p[0]] == goal :
+            self.grid[p[1]][p[0]] = goal;
           else :
             self.grid[p[1]][p[0]] = path;
         
