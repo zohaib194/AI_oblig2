@@ -215,7 +215,7 @@ def main():
     master.geometry('700x300')
     master.configure(background='SteelBlue1')
 
-    env.gridParser("board-2-1.txt")
+    env.gridParser("board-2-4.txt")
     # env.aStar()
     env.makeWindow(master)
     # env.printGrid();
