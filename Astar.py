@@ -1,14 +1,19 @@
 from tkinter import *
 import numpy as np
 
+#This variable is changed depending on which part of assignment is to be run, since part 1 uses symbols and part 2 uses characters
+#task = 1, for part 1
+#task = 2, for part 2
 task = 2
 
+#constants used for parsing the boards
 walkable = 0
 wall = np.inf
 start = 4
 goal = 2
 path = 3
 
+#weights used when parsing the boards
 water = 100
 mountain = 50
 forest = 10
@@ -28,16 +33,20 @@ class Enviorment:
     # pathCost[,];
     # heuristic[,];
 
+    #function: reads the board file and stores the grid depending on task 1 or task 2
     def gridParser(self, file):
         i = 0
         j = 0
         row = []
+
+        #parsing the board file into a array
         with open(file) as fileObj:
             for fileLine in fileObj:
                 self.grid.append([])
                 self.gridCellWeight.append([])
                 j = 0
                 for char in fileLine:
+                    #task 2 uses letters
                     if task == 2:
                         if "m" in char:
                             self.gridCellWeight[i].append(mountain)
@@ -66,6 +75,7 @@ class Enviorment:
                         else:
                             i += 1
 
+                    #task 1 uses signs in the board files so this were we parse those
                     if task == 1:
                         if "#" is not char:
                             self.gridCellWeight[i].append(walkable)
@@ -88,10 +98,11 @@ class Enviorment:
                     j += 1
                 self.width = j - 1
                 self.height = i
-
+    #prints the grid array in the console
     def printGrid(self):
         print(self.grid)
 
+    #creates the visual window of environment
     def makeWindow(self, master):
         path = self.aStar()
         for p in path:
@@ -147,6 +158,7 @@ class Enviorment:
                         e = Entry(master, bg="yellow", width=2)
                         e.grid(row=y, column=x)
 
+    #retraces the path taken and stores it in total_path array
     def makeShortestPath(self, cameFrom, current):
         total_path = [current]
         while current is not self.startCell:
@@ -154,9 +166,11 @@ class Enviorment:
             total_path.append(current)
         return total_path
 
+    #calculates the heuristic value using manhattan distance
     def heuristicValue(self, start, goal):
         return (abs(start[0] - goal[0]) + abs(start[1] - goal[1]))
 
+    #this function runs the astar algorithm
     def aStar(self):
         #infinityGrid = self.grid
         infinityValue = 1000
@@ -208,13 +222,14 @@ class Enviorment:
             openSet.sort(key=lambda e: self.gridCellWeight[e[1]][e[0]])
             # print(openSet)
 
-
+#setup and initialization of the program
 def main():
     env = Enviorment()
     master = Tk()
     master.geometry('700x300')
     master.configure(background='SteelBlue1')
 
+    #change this variable depending on which board you want to parse
     env.gridParser("board-2-4.txt")
     # env.aStar()
     env.makeWindow(master)
